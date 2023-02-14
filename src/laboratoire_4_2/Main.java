@@ -31,8 +31,17 @@ public class Main {
                     case "1":
                         System.out.println("Entrer le nombre d'anneaux désiré : ");
                         String number = input.nextLine();
-                        int nb = Integer.parseInt(number);
-                        tours = new ToursHanoi(nb);
+                        int nb;
+                        try {
+                            nb = Integer.parseInt(number);
+                            if (nb > 0 && nb < 9) {
+                                tours = new ToursHanoi(nb);
+                            } else {
+                                System.out.println("Votre nombre n'est pas entre 1 et 9.");
+                            }
+                        } catch (Error e) {
+                            System.out.println("Erreur ! ce que vous avez entré n'est pas un nombre entre 1 et 9.");
+                        }
                         break;
                     case "2":
                         tours = new ToursHanoi(3);

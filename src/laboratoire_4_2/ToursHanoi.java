@@ -4,7 +4,6 @@ import laboratoire_4_2.Tour;
 
 public class ToursHanoi {
     private int nbAnneaux;
-    private int nbDeplacements;
 
     private Tour[] tours = new Tour[3];
 
@@ -16,45 +15,62 @@ public class ToursHanoi {
     }
 
     public void resoudre() {
-        this.nbDeplacements = 0;
-        deplacer(this.nbAnneaux, 'A', 'B', 'C');
+        reinitialiser(nbAnneaux);
+        // deplacer('A', 'B', 'C');
     }
 
-    private void deplacer(int disque, char de, char inter, char vers) {
-        if (disque == 1) // disque 1: disque le plus petit: cas de base
-        {
-            this.nbDeplacements++;
-            System.out.println("Déplacement #" + this.nbDeplacements + ": du disque 1 de " + de + " vers " + vers);
-        } else {
-            deplacer(disque - 1, de, vers, inter);
-            this.nbDeplacements++;
-            System.out.println(
-                    "Déplacement #" + this.nbDeplacements + ": du disque " + disque + " de " + de + " vers " + vers);
-            deplacer(disque - 1, inter, de, vers);
-        }
+    public void deplacer(char de, char vers) {
+        int peekDe = findPeek(findIndex(de));
+        tours[findIndex(de)].pop();
+        tours[findIndex(vers)].push(peekDe);
+        afficherTours(tours[0]);
+        afficherTours(tours[1]);
+        afficherTours(tours[2]);
     }
 
     public void afficherTours(Tour tour) {
         System.out.println(tour.getNomTour());
         System.out.println("-------");
-        for (int i = 0; i < tour.getTableau().length; i++) {
-            if (tour.getTableau()[i] == null) {
+        for (int i = tour.getTableau().length; i > 0; i--) {
+            if (tour.getTableau()[i - 1] == null) {
                 System.out.println("-");
             } else {
-                System.out.println(tour.getTableau()[i].getDiametre());
+                System.out.println(tour.getTableau()[i - 1].getDiametre());
             }
             System.out.println("-------");
         }
         System.out.println("\n");
     }
 
+    public void deplacerAuto() {
+
+    }
+
+    public int findIndex(char c) {
+        System.out.println(c);
+        if (Character.isLowerCase(c)) {
+            c = Character.toUpperCase(c);
+        }
+        for (int i = 0; i < 3; i++) {
+            if (tours[i].getNomTour() == c) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    public int findPeek(int index) {
+        return tours[index].peek();
+    }
+
     public void reinitialiser(int nbAnneaux) {
         tours[0].clear();
         tours[1].clear();
         tours[2].clear();
-        for (int i = 0; i < nbAnneaux; i++) {
-            tours[0].getTableau()[i] = new Anneau(i + 1);
+        for (int i = nbAnneaux; i > 0; i--) {
+            tours[0].getTableau()[nbAnneaux - i] = new Anneau(i);
         }
+        System.out.println("Le jeu a été réinitialisé.");
         System.out.println("------------------------Les tours--------------------------\n");
         afficherTours(tours[0]);
         afficherTours(tours[1]);

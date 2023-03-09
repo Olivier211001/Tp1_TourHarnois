@@ -44,6 +44,25 @@ public class Main {
                         tours = new ToursHanoi(3);
                         break;
                     case "3":
+                        String s = "";
+                        char de = '0';
+                        char[] table = new char[] { 'A', 'a', 'B', 'b', 'C', 'c' };
+
+                        System.out.println("À partir de quelle tour souhaitez-vous déplacer une anneau ?");
+                        s = input.next();
+                        de = s.charAt(0);
+                        System.out.println(de);
+
+                        s = "";
+                        char vers = '2';
+
+                        System.out.println("Vers quelle tour?");
+                        s = input.next();
+                        vers = s.charAt(0);
+                        if (vers == de) {
+                            System.out.println("Erreur! Vous ne pouvez pas chosir la même tour.");
+                        }
+                        tours.deplacer(de, vers);
                         break;
                     case "4":
                         break;

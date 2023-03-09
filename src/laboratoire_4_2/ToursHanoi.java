@@ -29,15 +29,15 @@ public class ToursHanoi {
     }
 
     public void afficherTours(Tour tour) {
-        System.out.println(tour.getNomTour());
-        System.out.println("-------");
-        for (int i = tour.getTableau().length; i > 0; i--) {
-            if (tour.getTableau()[i - 1] == null) {
-                System.out.println("-");
+        System.out.print(tour.getNomTour() + " :");
+        // System.out.println("-------");
+        for (int i = 0; i < tour.getTableau().length; i++) {
+            if (tour.getTableau()[i] == null) {
+                System.out.print("-");
             } else {
-                System.out.println(tour.getTableau()[i - 1].getDiametre());
+                System.out.print(tour.getTableau()[i].getDiametre());
             }
-            System.out.println("-------");
+            // System.out.println("-------");
         }
         System.out.println("\n");
     }

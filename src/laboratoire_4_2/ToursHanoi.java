@@ -8,6 +8,7 @@ public class ToursHanoi {
     private Tour[] tours = new Tour[3];
 
     private boolean flagIsUp = false;
+    private boolean isPair = false;
 
     private int count = 0;
 
@@ -21,8 +22,11 @@ public class ToursHanoi {
     public void resoudre() {
         int nb = tours[0].getTableau().length;
         if (nb % 2 == 0) {
-            deplacerAuto(4, 'a', 'c', 'b');
+            isPair = true;
+            deplacerAuto(nb - 1, 'a', 'c', 'b');
+
         } else {
+            isPair = false;
             deplacerAuto(nb - 1, 'a', 'c', 'b');
         }
     }
@@ -49,9 +53,20 @@ public class ToursHanoi {
         System.out.println("\n");
     }
 
+    // déplacment récursif utilisé par la fonction resoudre()
     public void deplacerAuto(int n, char de, char entre, char vers) {
+
         if (!flagIsUp) {
             int peekDe = findPeek(findIndex(de));
+            int peekVers = findPeek(findIndex(vers));
+            if (isPair == true) {
+                if (peekVers == (tours[0].getTableau().length)) {
+                    vers = 'c';
+                }
+                if (peekVers == (tours[0].getTableau().length)) {
+                    de = 'b';
+                }
+            }
             if (peekDe == tours[0].getTableau().length) {
                 vers = 'c';
             }
@@ -66,6 +81,9 @@ public class ToursHanoi {
                     count++;
                 }
                 if (count == 1) {
+                    flagIsUp = true;
+                }
+                if (peekVers == 1 && vers == 'c') {
                     flagIsUp = true;
                 }
             } else {

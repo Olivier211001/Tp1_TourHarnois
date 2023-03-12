@@ -51,7 +51,7 @@ public class Main {
                         System.out.println("À partir de quelle tour souhaitez-vous déplacer une anneau ?");
                         s = input.next();
                         de = s.charAt(0);
-                        System.out.println(de);
+                        // System.out.println(de);
 
                         s = "";
                         char vers = '2';
@@ -65,6 +65,7 @@ public class Main {
                         tours.deplacer(de, vers);
                         break;
                     case "4":
+                        tours.resoudre();
                         break;
                     case "5":
                         isFinish = true;

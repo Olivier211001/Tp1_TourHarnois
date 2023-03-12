@@ -26,32 +26,45 @@ public class Tour {
         return this.tableau_anneaux;
     }
 
-    private boolean isEmpty() {
-        return false;
+    public boolean isEmpty() {
+        boolean flag = false;
+        for (Anneau a : this.tableau_anneaux) {
+            if (a == null) {
+                flag = true;
+            }
+        }
+        return flag;
     }
 
-    private boolean isFull() {
-        return false;
+    public boolean isFull() {
+        boolean flag = false;
+        for (Anneau a : this.tableau_anneaux) {
+            if (a != null) {
+                flag = true;
+            }
+        }
+        return flag;
     }
 
     public void push(int e) {
         int count = 0;
-        // System.out.println(count);
 
         boolean flag = true;
         while (flag) {
-            if (tableau_anneaux[count] == null) {
-                tableau_anneaux[count] = new Anneau(e);
-                flag = false;
+            try {
+                if (tableau_anneaux[count] == null) {
+                    tableau_anneaux[count] = new Anneau(e);
+                    flag = false;
+                }
+            } catch (Error er) {
+                System.out.println("--déplacement refusé--");
             }
             count++;
         }
-        // System.out.println(tableau_anneaux.length);
     }
 
     public void pop() {
         int count = (tableau_anneaux.length - 1);
-        // System.out.println(count);
 
         boolean flag = true;
         while (flag && count >= 0) {
@@ -61,12 +74,10 @@ public class Tour {
             }
             count--;
         }
-        // System.out.println(tableau_anneaux.length);
     }
 
     public int peek() {
         int count = (tableau_anneaux.length - 1);
-        // System.out.println(count);
 
         while (count >= 0) {
             if (tableau_anneaux[count] != null) {

@@ -7,6 +7,10 @@ public class ToursHanoi {
 
     private Tour[] tours = new Tour[3];
 
+    private boolean flagIsUp = false;
+
+    private int count = 0;
+
     public ToursHanoi(int nbAnneaux) {
         tours[0] = new Tour(nbAnneaux, 'A');
         tours[1] = new Tour(nbAnneaux, 'B');
@@ -15,14 +19,19 @@ public class ToursHanoi {
     }
 
     public void resoudre() {
-        reinitialiser(nbAnneaux);
-        // deplacer('A', 'B', 'C');
+        int nb = tours[0].getTableau().length;
+        if (nb % 2 == 0) {
+            deplacerAuto(4, 'a', 'c', 'b');
+        } else {
+            deplacerAuto(nb - 1, 'a', 'c', 'b');
+        }
     }
 
     public void deplacer(char de, char vers) {
         int peekDe = findPeek(findIndex(de));
         tours[findIndex(de)].pop();
         tours[findIndex(vers)].push(peekDe);
+        System.out.println("-----------------------------------------");
         afficherTours(tours[0]);
         afficherTours(tours[1]);
         afficherTours(tours[2]);
@@ -30,24 +39,44 @@ public class ToursHanoi {
 
     public void afficherTours(Tour tour) {
         System.out.print(tour.getNomTour() + " :");
-        // System.out.println("-------");
         for (int i = 0; i < tour.getTableau().length; i++) {
-            if (tour.getTableau()[i] == null) {
+            if (tour.getTableau()[i] == null || tour.getTableau()[i].getDiametre() == -1) {
                 System.out.print("-");
             } else {
                 System.out.print(tour.getTableau()[i].getDiametre());
             }
-            // System.out.println("-------");
         }
         System.out.println("\n");
     }
 
-    public void deplacerAuto() {
-
+    public void deplacerAuto(int n, char de, char entre, char vers) {
+        if (!flagIsUp) {
+            int peekDe = findPeek(findIndex(de));
+            if (peekDe == tours[0].getTableau().length) {
+                vers = 'c';
+            }
+            if (tours[0].isEmpty()) {
+                deplacer(de, vers);
+                de = 'b';
+            }
+            if (n == 1) {
+                deplacer(de, vers);
+                if (tours[2].isFull() && count == 0) {
+                    deplacer(de, vers);
+                    count++;
+                }
+                if (count == 1) {
+                    flagIsUp = true;
+                }
+            } else {
+                deplacerAuto(n - 1, de, entre, vers);
+                deplacer(de, vers);
+                deplacerAuto(n - 1, de, entre, vers);
+            }
+        }
     }
 
     public int findIndex(char c) {
-        System.out.println(c);
         if (Character.isLowerCase(c)) {
             c = Character.toUpperCase(c);
         }

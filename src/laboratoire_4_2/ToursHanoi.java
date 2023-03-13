@@ -33,8 +33,12 @@ public class ToursHanoi {
 
     public void deplacer(char de, char vers) {
         int peekDe = findPeek(findIndex(de));
-        tours[findIndex(de)].pop();
-        tours[findIndex(vers)].push(peekDe);
+        if (peekDe == -1) {
+            System.out.println("***Déplacement interdit***");
+        } else {
+            tours[findIndex(de)].pop();
+            tours[findIndex(vers)].push(peekDe);
+        }
         System.out.println("-----------------------------------------");
         afficherTours(tours[0]);
         afficherTours(tours[1]);

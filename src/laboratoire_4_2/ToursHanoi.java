@@ -55,11 +55,10 @@ public class ToursHanoi {
 
     // déplacment récursif utilisé par la fonction resoudre()
     public void deplacerAuto(int n, char de, char entre, char vers) {
-
         if (!flagIsUp) {
             int peekDe = findPeek(findIndex(de));
             int peekVers = findPeek(findIndex(vers));
-            if (isPair == true) {
+            if (isPair) {
                 if (peekVers == (tours[0].getTableau().length)) {
                     vers = 'c';
                 }
@@ -81,9 +80,6 @@ public class ToursHanoi {
                     count++;
                 }
                 if (count == 1) {
-                    flagIsUp = true;
-                }
-                if (peekVers == 1 && vers == 'c') {
                     flagIsUp = true;
                 }
             } else {

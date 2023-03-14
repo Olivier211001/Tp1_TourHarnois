@@ -22,10 +22,12 @@ public class Tour {
         return this.nomTour;
     }
 
+    // retourne le tableau d'anneaux d'une tour
     public Anneau[] getTableau() {
         return this.tableau_anneaux;
     }
 
+    // retourne si la tour est vide ou non
     public boolean isEmpty() {
         boolean flag = false;
         for (Anneau a : this.tableau_anneaux) {
@@ -36,6 +38,7 @@ public class Tour {
         return flag;
     }
 
+    // return si la tour est pleine ou non
     public boolean isFull() {
         boolean flag = false;
         for (Anneau a : this.tableau_anneaux) {
@@ -46,6 +49,7 @@ public class Tour {
         return flag;
     }
 
+    // ajoute l'élément (anneau) dans la tour)
     public void push(int e) {
         int count = 0;
 
@@ -63,6 +67,7 @@ public class Tour {
         }
     }
 
+    // retire l'élément peek de la tour
     public void pop() {
         int count = (tableau_anneaux.length - 1);
 
@@ -76,6 +81,7 @@ public class Tour {
         }
     }
 
+    // retourne le peek d'une tour
     public int peek() {
         int count = (tableau_anneaux.length - 1);
 
@@ -88,6 +94,7 @@ public class Tour {
         return -1;
     }
 
+    // clear la tour
     public void clear() {
         for (int i = 0; i < this.tableau_anneaux.length; i++) {
             this.tableau_anneaux[i] = null;

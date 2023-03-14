@@ -9,6 +9,7 @@ public class Anneau {
         this.diametre = d;
     }
 
+    // retourne le diametre d'une anneau
     public int getDiametre() {
         return this.diametre;
     }

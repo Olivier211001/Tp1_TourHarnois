@@ -50,7 +50,6 @@ public class Main {
                         tours = new ToursHanoi(3);
                         break;
                     case "3":
-                        tours.setAuto(false); // se mets en mode manuel
                         String s = "";
                         char de = '0';
                         System.out.println("À partir de quelle tour souhaitez-vous déplacer une anneau ?");

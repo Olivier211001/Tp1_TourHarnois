@@ -60,6 +60,7 @@ public class ToursHanoi {
         // si le sommet de la pile que l'on va chercher est de -1, donc l'anneaux est
         // null, alors le déplacement est interdit
         int peekDe = findPeek(findIndex(de));
+        int peekC = findPeek(findIndex('c'));
         if (peekDe != -1) {
             tours[findIndex(de)].pop();
             tours[findIndex(vers)].push(peekDe);
@@ -72,6 +73,10 @@ public class ToursHanoi {
             if (!auto) {
                 System.out.println("***déplacemnents interdit***");
             }
+        }
+        if (peekC == 2 && !auto) {
+            System.out.println("Wow ! Bravo vous avez réussi !!");
+            reinitialiser(tours[0].getTableau().length);
         }
     }
 

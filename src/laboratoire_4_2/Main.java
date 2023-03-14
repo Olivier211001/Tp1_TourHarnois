@@ -27,8 +27,9 @@ public class Main {
                 switch (commande) {
                     case "1":
                         System.out.println("Entrer le nombre d'anneaux désiré : ");
+                        input = new Scanner(System.in);
                         String number = input.nextLine();
-                        int nb;
+                        int nb = 0;
                         try {
                             nb = Integer.parseInt(number);
                             if (nb > 0 && nb < 10) {
@@ -44,30 +45,30 @@ public class Main {
                         tours = new ToursHanoi(3);
                         break;
                     case "3":
+                        tours.setAuto(false);
                         String s = "";
                         char de = '0';
-                        char[] table = new char[] { 'A', 'a', 'B', 'b', 'C', 'c' };
-
                         System.out.println("À partir de quelle tour souhaitez-vous déplacer une anneau ?");
                         s = input.next();
                         de = s.charAt(0);
-                        // System.out.println(de);
-
                         s = "";
                         char vers = '2';
-
                         System.out.println("Vers quelle tour?");
                         s = input.next();
                         vers = s.charAt(0);
-                        if (vers == de) {
-                            System.out.println("Erreur! Vous ne pouvez pas chosir la même tour.");
+                        if ((vers == de)) {
+                            System.out.println("Erreur! déplacment impossible.");
                         }
                         tours.deplacer(de, vers);
                         break;
                     case "4":
+                        tours.setAuto(true);
                         tours.resoudre();
+                        System.out.println("Nombre de déplacments :" + tours.getNbDeplacements());
+                        tours.reinitializeNbDeplacments();
                         break;
                     case "5":
+                        System.out.println("GOOD BYE !!");
                         isFinish = true;
                         break;
                 }

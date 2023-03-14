@@ -12,11 +12,27 @@ public class ToursHanoi {
 
     private int count = 0;
 
+    private int nbDeplacements = 0;
+
+    private boolean auto = false;
+
     public ToursHanoi(int nbAnneaux) {
         tours[0] = new Tour(nbAnneaux, 'A');
         tours[1] = new Tour(nbAnneaux, 'B');
         tours[2] = new Tour(nbAnneaux, 'C');
         reinitialiser(nbAnneaux);
+    }
+
+    public int getNbDeplacements() {
+        return nbDeplacements;
+    }
+
+    public void setAuto(boolean aut) {
+        auto = aut;
+    }
+
+    public void reinitializeNbDeplacments() {
+        nbDeplacements = 0;
     }
 
     public void resoudre() {
@@ -33,16 +49,19 @@ public class ToursHanoi {
 
     public void deplacer(char de, char vers) {
         int peekDe = findPeek(findIndex(de));
-        if (peekDe == -1) {
-            System.out.println("***Déplacement interdit***");
-        } else {
+        if (peekDe != -1) {
             tours[findIndex(de)].pop();
             tours[findIndex(vers)].push(peekDe);
+            nbDeplacements++;
+            System.out.println("-----------------------------------------");
+            afficherTours(tours[0]);
+            afficherTours(tours[1]);
+            afficherTours(tours[2]);
+        } else {
+            if (!auto) {
+                System.out.println("***déplacemnents interdit***");
+            }
         }
-        System.out.println("-----------------------------------------");
-        afficherTours(tours[0]);
-        afficherTours(tours[1]);
-        afficherTours(tours[2]);
     }
 
     public void afficherTours(Tour tour) {
